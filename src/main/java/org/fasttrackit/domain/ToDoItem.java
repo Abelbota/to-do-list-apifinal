@@ -1,6 +1,8 @@
 package org.fasttrackit.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 public class ToDoItem {
 
@@ -48,5 +50,14 @@ public class ToDoItem {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("test1", "test2");
+
+        for (String a : list) {
+            System.out.println(a);
+        }
     }
 }

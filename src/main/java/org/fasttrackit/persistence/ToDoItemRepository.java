@@ -26,6 +26,18 @@ public class ToDoItemRepository {
         }
     }
 
+    public void markToDoItemDone(long id, boolean done) throws SQLException {
+        try (Connection connection = DatabaseConfiguration.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE to_do_items SET done=? WHERE id=?");
+
+            preparedStatement.setBoolean(1, done);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
     public List<ToDoItem> getToDoItems() throws SQLException {
         try (Connection connection = DatabaseConfiguration.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -48,6 +60,18 @@ public class ToDoItemRepository {
             }
 
             return response;
+        }
+    }
+
+    public void deleteItem(long id) throws SQLException {
+        try (Connection connection = DatabaseConfiguration.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM to_do_items WHERE id=?"
+            );
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
         }
     }
 }
